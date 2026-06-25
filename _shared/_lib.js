@@ -15,7 +15,9 @@ export function escapeHtml(s) {
 }
 
 // ---- <head> + open <body> ----
-export function head(brand, { title, description, path = '/' } = {}) {
+// `bodyClass` lets a page opt into behaviours: e.g. 'has-hero' = a full-bleed media
+// hero the fixed nav overlays transparently (otherwise body is padded for the nav).
+export function head(brand, { title, description, path = '/', bodyClass = '' } = {}) {
   const t = title || brand.name;
   const desc = description || brand.tagline;
   const url = brand.siteUrl + path;
@@ -35,7 +37,7 @@ export function head(brand, { title, description, path = '/' } = {}) {
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 ${realEstateSchema(brand)}
-</head><body>`;
+</head><body class="${escapeHtml(bodyClass)}">`;
 }
 
 // ---- top navigation ----
@@ -43,6 +45,10 @@ ${realEstateSchema(brand)}
 // their right ("in case you want more"). Secondary pages stay real <a href> in the
 // markup (and are mirrored in the footer) so nothing is lost for SEO when the
 // links collapse into the mobile menu. brand.navStock is an optional subtle callout.
+//
+// Behaviour (timallenproperties.com style): the nav is fixed. At the top of a
+// `has-hero` page it's transparent over the hero media; once you scroll it turns
+// opaque; scrolling DOWN slides it off the top, scrolling UP brings it back.
 export function nav(brand) {
   const links = brand.nav.map((n) => `<a href="${n.href}">${escapeHtml(n.label)}</a>`).join('');
   const stock = brand.navStock
@@ -56,7 +62,18 @@ export function nav(brand) {
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var m=document.getElementById('navlinks'),o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">&#9776;</button>
   </div>
 </div></header>
-<script>(function(){var n=document.currentScript.previousElementSibling;function s(){n.classList.toggle('scrolled',(window.pageYOffset||0)>8)}s();addEventListener('scroll',s,{passive:true})})();</script>`;
+<script>(function(){
+  var n=document.currentScript.previousElementSibling,last=window.pageYOffset||0,tick=false;
+  function u(){
+    var y=window.pageYOffset||0;
+    n.classList.toggle('scrolled',y>24);                 // opaque once past the very top
+    if(y>last&&y>140)n.classList.add('nav-hidden');      // scrolling down → slide off
+    else if(y<last)n.classList.remove('nav-hidden');     // scrolling up → bring back
+    last=y;tick=false;
+  }
+  addEventListener('scroll',function(){if(!tick){requestAnimationFrame(u);tick=true;}},{passive:true});
+  u();
+})();</script>`;
 }
 
 // ---- footer (with required CA real-estate compliance line) ----
