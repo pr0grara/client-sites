@@ -2,7 +2,8 @@
 // This is the engine: add a city to _data.js and a new ranking page exists. No build step.
 
 import { page, escapeHtml, html } from '../_lib.js';
-import { BRAND, CITIES, REVIEWS } from '../_data.js';
+import { BRAND, CITIES, REVIEWS, BUILDINGS } from '../_data.js';
+import { buildingCard } from '../_buildings.js';
 
 export function onRequestGet(context) {
   const slug = context.params.city;
@@ -21,6 +22,42 @@ export function onRequestGet(context) {
 
 function body(city) {
   const review = REVIEWS[2]; // Mitch — Emeryville-condo specific, good social proof on these pages
+
+  // The building directory is the standout buyer tool, and it's live (unlike the
+  // IDX search, still mocked). So when this city has buildings in the directory,
+  // it becomes the hero's primary CTA and gets a showcase band. Data-driven: add
+  // Oakland/Berkeley buildings to _data.js and their pages light up automatically.
+  const cityBuildings = BUILDINGS.filter((b) => b.city === city.name);
+  const hasDir = cityBuildings.length > 0;
+
+  const heroCta = hasDir
+    ? `<a class="btn gold lg" href="/condos">Browse all ${cityBuildings.length} ${escapeHtml(city.name)} condo buildings</a>
+        <a class="btn ghost lg" href="/home-value">What's my ${escapeHtml(city.name)} condo worth?</a>`
+    : `<a class="btn lg" href="/#search">Search ${escapeHtml(city.name)} listings</a>
+        <a class="btn ghost lg" href="/home-value">What's my ${escapeHtml(city.name)} home worth?</a>`;
+
+  // Teaser: lead with the photographed / sold-in buildings, they look best.
+  const teaser = cityBuildings
+    .slice()
+    .sort((a, b) => (b.img ? 1 : 0) - (a.img ? 1 : 0) || b.augusteSold - a.augusteSold)
+    .slice(0, 3)
+    .map(buildingCard)
+    .join('');
+
+  const dirBand = hasDir
+    ? `<section class="band alt"><div class="wrap">
+        <div class="section-head">
+          <span class="label">The Condo Directory · A buyer's tool</span>
+          <h2 class="section-title">Know the building before you buy.</h2>
+          <p class="lede">Every major ${escapeHtml(city.name)} condo building, one page each: HOA, amenities, parking, and what units actually trade for. The reference no portal and no other agent hands you, kept by the broker who sells in these buildings every month.</p>
+        </div>
+        <div class="cards bld-grid">${teaser}</div>
+        <div class="hero-cta" style="margin-top:28px">
+          <a class="btn gold lg" href="/condos">See all ${cityBuildings.length} ${escapeHtml(city.name)} condo buildings</a>
+        </div>
+      </div></section>`
+    : '';
+
   return `
   <section class="band" style="padding-bottom:0">
     <div class="wrap">
@@ -28,11 +65,12 @@ function body(city) {
       <h1 class="display" style="font-size:clamp(34px,5.5vw,60px);margin:12px 0 18px">${escapeHtml(city.h1)}</h1>
       <p class="lede">${escapeHtml(city.intro)}</p>
       <div class="hero-cta" style="margin-top:26px">
-        <a class="btn lg" href="/#search">Search ${escapeHtml(city.name)} listings</a>
-        <a class="btn ghost lg" href="/home-value">What's my ${escapeHtml(city.name)} home worth?</a>
+        ${heroCta}
       </div>
     </div>
   </section>
+
+  ${dirBand}
 
   <section class="band"><div class="wrap">
     <div class="section-head">

@@ -217,6 +217,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'glashaus', name: 'Glashaus', aka: ['Glashaus Lofts'], city: 'Emeryville',
+    img: 'buildings/glashaus.jpg', // CC0 photo, Mike Linksvayer — see assets/buildings/README.md
     neighborhood: 'Hollis / Park Avenue District', type: 'loft',
     yearBuilt: 2008, stories: 4, units: 145,
     hoa: null, hoaIncludes: ['Water', 'Sewer', 'Trash', 'Grounds', 'Insurance', 'Management'],

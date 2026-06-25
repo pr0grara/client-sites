@@ -8,7 +8,8 @@ import { page, escapeHtml } from './_lib.js';
 import { BRAND, STATS, BIO, REVIEWS, CITIES, MULTIFAMILY, SOLD } from './_data.js';
 
 export function onRequestGet() {
-  return new Response(page(BRAND, { path: '/' }, body()), {
+  // bodyClass:'has-hero' → the fixed nav overlays the video hero transparently.
+  return new Response(page(BRAND, { path: '/', bodyClass: 'has-hero' }, body()), {
     headers: { 'Content-Type': 'text/html; charset=utf-8' }
   });
 }
@@ -17,10 +18,17 @@ function body() {
   return hero() + stats() + actions() + about() + sold() + search() + communities() + reviews() + ctaband() + contact();
 }
 
-/* ---------- hero ---------- */
+/* ---------- hero (full-bleed Emeryville video) ----------
+   Drop his clip in at /assets/heros/emeryville.mp4 (add a .webm too if you have one)
+   and it autoplays behind the copy. Until then the poster image carries it. */
 function hero() {
-  return `<section class="hero"><div class="wrap">
-    <div class="hero-copy">
+  return `<section class="hero-video" id="top">
+    <video class="hero-bg" autoplay muted loop playsinline preload="metadata"
+           poster="/assets/sold/pacific-park-plaza.jpg" aria-hidden="true">
+      <source src="/assets/heros/emeryville.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim"></div>
+    <div class="wrap hero-video-inner">
       <span class="label">Emeryville · Oakland · Berkeley · Alameda</span>
       <h1 class="display">The Emeryville<br><em>condo specialist.</em></h1>
       <p class="lede">Over $35M sold and 60+ homes closed in seven years. Whether you're selling your condo or buying your first, I bring calm, candor, and sharp negotiation to every step — and I sell your home, seamlessly.</p>
@@ -29,10 +37,8 @@ function hero() {
         <a class="btn ghost lg" href="/home-value">What's my condo worth?</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="/assets/heros/hero.jpg" alt="Auguste Vende, Emeryville real estate broker" width="600" height="750">
-    </div>
-  </div></section>`;
+    <a class="hero-scroll" href="#search">Scroll</a>
+  </section>`;
 }
 
 /* ---------- stat strip ---------- */
