@@ -1,0 +1,510 @@
+{
+  "_meta": {
+    "source": "Paragon MLS export \u2014 closed/sold, seller-side only (Auguste = listing agent)",
+    "note": "Buyer-side reps excluded (photos belong to the selling agent). 'building' groups listings; 'photo' points to assets/sold/.",
+    "count": 42,
+    "volume": 26558500,
+    "buildingPhotos": {
+      "Watergate": "assets/sold/watergate.jpg",
+      "Pacific Park Plaza": "assets/sold/pacific-park-plaza.jpg",
+      "The Terraces at Emerystation": "assets/sold/5855-horton-terraces.webp",
+      "Bridgewater": "assets/sold/6400-christie-bridgewater.jpg",
+      "Emeryville Warehouse Lofts": "assets/sold/1500-park.jpg",
+      "The Infinity": "assets/sold/338-spear-infinity.jpg"
+    }
+  },
+  "listings": [
+    {
+      "mls": "40894165",
+      "address": "5 Commodore Drive",
+      "unit": "213",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 450000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 12
+    },
+    {
+      "mls": "40921664",
+      "address": "7 Captain Drive",
+      "unit": "403",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 335000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 9
+    },
+    {
+      "mls": "40931397",
+      "address": "6 Captain Drive",
+      "unit": "336",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 620000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 6
+    },
+    {
+      "mls": "40939594",
+      "address": "6 Admiral",
+      "unit": "497",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 525000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 3
+    },
+    {
+      "mls": "40939600",
+      "address": "1 Captain",
+      "unit": "266",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 600000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 14
+    },
+    {
+      "mls": "40940620",
+      "address": "2 Commodore",
+      "unit": "372",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 338000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 10
+    },
+    {
+      "mls": "40973044",
+      "address": "6 Commodore",
+      "unit": "344",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 625000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 0
+    },
+    {
+      "mls": "40995885",
+      "address": "3 Admiral Drive",
+      "unit": "F261",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 400000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 25
+    },
+    {
+      "mls": "41016819",
+      "address": "6 Captain",
+      "unit": "E231",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 420000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 32
+    },
+    {
+      "mls": "41026304",
+      "address": "5 Admiral Drive",
+      "unit": "F312",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 369000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 38
+    },
+    {
+      "mls": "41027179",
+      "address": "2 Commodore Dr",
+      "unit": "D277",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 625000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 53
+    },
+    {
+      "mls": "41036093",
+      "address": "4 Commodore Drive",
+      "unit": "D438",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 415000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 33
+    },
+    {
+      "mls": "41039387",
+      "address": "3 Commodore Drive",
+      "unit": "B359",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 570000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 39
+    },
+    {
+      "mls": "41052439",
+      "address": "8 Captain Drive",
+      "unit": "E364",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 650000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 38
+    },
+    {
+      "mls": "41069934",
+      "address": "8 Commodore",
+      "unit": "C455",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 330000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 35
+    },
+    {
+      "mls": "41070865",
+      "address": "6 Captain Drive",
+      "unit": "E443",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 367500,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 40
+    },
+    {
+      "mls": "41072617",
+      "address": "4 Anchor Drive",
+      "unit": "F240",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 330000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 44
+    },
+    {
+      "mls": "41082164",
+      "address": "1 Captain Drive",
+      "unit": "D258",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 515000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 49
+    },
+    {
+      "mls": "41087161",
+      "address": "8 Commodore",
+      "unit": "C261",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 349000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 46
+    },
+    {
+      "mls": "41122021",
+      "address": "4 Anchor Drive",
+      "unit": "F331",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 251000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 35
+    },
+    {
+      "mls": "41127656",
+      "address": "2 Anchor Drive",
+      "unit": "F491",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 275000,
+      "type": "Condo",
+      "building": "Watergate",
+      "pics": 0
+    },
+    {
+      "mls": "40940010",
+      "address": "6363 Christie Avenue",
+      "unit": "1516",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 725000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 10
+    },
+    {
+      "mls": "40975028",
+      "address": "6363 Christie",
+      "unit": "2104",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 585000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 32
+    },
+    {
+      "mls": "40980555",
+      "address": "6363 Christie",
+      "unit": "921",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 420000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 26
+    },
+    {
+      "mls": "41021833",
+      "address": "6363 Christie",
+      "unit": "2825",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 1220000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 1
+    },
+    {
+      "mls": "41026387",
+      "address": "6363 Christie",
+      "unit": "2126",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 1200000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 38
+    },
+    {
+      "mls": "41026602",
+      "address": "6363 Christie Avenue",
+      "unit": "1215",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 470000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 54
+    },
+    {
+      "mls": "41049426",
+      "address": "6363 Christie Avenue",
+      "unit": "2604",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 490000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 0
+    },
+    {
+      "mls": "41054758",
+      "address": "6363 Christie Avenue",
+      "unit": "1802",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 435000,
+      "type": "Condo",
+      "building": "Pacific Park Plaza",
+      "pics": 27
+    },
+    {
+      "mls": "41108703",
+      "address": "6400 Christie Avenue",
+      "unit": "1211",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 270000,
+      "type": "Condo",
+      "building": "Bridgewater",
+      "pics": 38
+    },
+    {
+      "mls": "41122578",
+      "address": "6400 Christie Avenue",
+      "unit": "3202",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 530000,
+      "type": "Condo",
+      "building": "Bridgewater",
+      "pics": 33
+    },
+    {
+      "mls": "40968153",
+      "address": "5855 Horton",
+      "unit": "808",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 600000,
+      "type": "Condo",
+      "building": "The Terraces at Emerystation",
+      "pics": 33
+    },
+    {
+      "mls": "41077089",
+      "address": "5855 Horton Street",
+      "unit": "524",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 695000,
+      "type": "Condo",
+      "building": "The Terraces at Emerystation",
+      "pics": 37
+    },
+    {
+      "mls": "41081649",
+      "address": "5855 Horton",
+      "unit": "704",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 630000,
+      "type": "Condo",
+      "building": "The Terraces at Emerystation",
+      "pics": 43
+    },
+    {
+      "mls": "40964248",
+      "address": "1500 Park",
+      "unit": "228",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 635000,
+      "type": "Condo",
+      "building": "Emeryville Warehouse Lofts",
+      "pics": 24
+    },
+    {
+      "mls": "41060583",
+      "address": "1500 Park Avenue",
+      "unit": "127",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 390000,
+      "type": "Condo",
+      "building": "Emeryville Warehouse Lofts",
+      "pics": 23
+    },
+    {
+      "mls": "41057472",
+      "address": "3609 Adeline Street",
+      "unit": "",
+      "city": "Emeryville",
+      "state": "CA",
+      "price": 740000,
+      "type": "Detached",
+      "building": "",
+      "pics": 31
+    },
+    {
+      "mls": "40929271",
+      "address": "1054 63rd",
+      "unit": "",
+      "city": "Oakland",
+      "state": "CA",
+      "price": 725000,
+      "type": "Detached",
+      "building": "",
+      "pics": 6
+    },
+    {
+      "mls": "40980684",
+      "address": "1505 32nd",
+      "unit": "",
+      "city": "Oakland",
+      "state": "CA",
+      "price": 807000,
+      "type": "Condo",
+      "building": "",
+      "pics": 41
+    },
+    {
+      "mls": "41081631",
+      "address": "338 Spear",
+      "unit": "4J",
+      "city": "San Francisco",
+      "state": "CA",
+      "price": 900000,
+      "type": "Condo",
+      "building": "The Infinity",
+      "pics": 35
+    },
+    {
+      "mls": "41112544",
+      "address": "2709 Channing",
+      "unit": "",
+      "city": "Berkeley",
+      "state": "CA",
+      "price": 2652000,
+      "type": "Multifamily",
+      "building": "",
+      "pics": 0
+    },
+    {
+      "mls": "41113914",
+      "address": "1929 California",
+      "unit": "",
+      "city": "Berkeley",
+      "state": "CA",
+      "price": 2080000,
+      "type": "5+ Units",
+      "building": "",
+      "pics": 31
+    }
+  ],
+  "_excluded_buyer_side": [
+    {
+      "mls": "40974760",
+      "address": "8 Admiral Drive #421",
+      "city": "Emeryville",
+      "price": 1305000,
+      "listingAgent": "Jason Crouch"
+    },
+    {
+      "mls": "41040967",
+      "address": "2407 Telegraph #205",
+      "city": "Oakland",
+      "price": 367500,
+      "listingAgent": "Yolanda P Gorman"
+    },
+    {
+      "mls": "41092303",
+      "address": "9 Commodore Dr #A206",
+      "city": "Emeryville",
+      "price": 246000,
+      "listingAgent": "Cynthia Urrutia-Nicas"
+    },
+    {
+      "mls": "41104967",
+      "address": "555 Pierce St #524",
+      "city": "Albany",
+      "price": 340000,
+      "listingAgent": "Cynthia Urrutia-Nicas"
+    }
+  ]
+}

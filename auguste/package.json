@@ -1,0 +1,17 @@
+{
+  "name": "auguste-realtor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "auguste-realtor.com — Emeryville condo specialist site (client-sites monorepo)",
+  "scripts": {
+    "sync": "cp ../_shared/_lib.js functions/_lib.js",
+    "dev": "wrangler pages dev",
+    "deploy": "wrangler pages deploy",
+    "db:create": "wrangler d1 create auguste-leads",
+    "db:init": "wrangler d1 execute auguste-leads --file=./schema.sql --remote",
+    "db:init:local": "wrangler d1 execute auguste-leads --file=./schema.sql --local"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

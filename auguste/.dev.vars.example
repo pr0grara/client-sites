@@ -1,0 +1,12 @@
+# Copy to ".dev.vars" (gitignored) for local dev, and set the real values in production
+# with `npx wrangler pages secret put NAME`. NEVER commit real secrets.
+
+# Resend API key for lead-alert emails
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+
+# --- IDX / MLS (Phase 3) ------------------------------------------------------
+# Auguste's Bridge MLS member login is NOT an API/data feed and does NOT go here.
+# IDX access comes from the chosen vendor (e.g. iHomeFinder) or a RESO Web API key
+# that Bridge MLS issues separately under a data-license agreement. Put THAT key here.
+# IDX_API_KEY=
+# IDX_AGENT_ID=

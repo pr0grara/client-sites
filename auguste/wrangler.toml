@@ -1,0 +1,18 @@
+# Cloudflare Pages project for auguste-realtor.com
+# Deploy:  nvm use 22 && npm run deploy   (uploads this dir straight to prod)
+name = "auguste-realtor"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+# Leads database (separate from arabuilds). Create once, then paste the printed id:
+#   npx wrangler d1 create auguste-leads
+[[d1_databases]]
+binding = "DB"
+database_name = "auguste-leads"
+database_id = "a3d821f2-685b-48f5-aeb4-c6a29561d643"
+
+# Non-secret vars. Secrets (RESEND_API_KEY, and later the IDX/MLS keys) go in via:
+#   npx wrangler pages secret put RESEND_API_KEY   (see SECRETS.md)
+[vars]
+ALERT_TO = "azbaghda@gmail.com"
+ALERT_FROM = "Auguste Realtor <onboarding@resend.dev>"
