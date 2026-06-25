@@ -21,4 +21,8 @@ One good photo per home is all I need and we don't need all 60 to start, 5-10 li
 
 4. Quick confirm: site shows $35M+ sold, 7 years, 60+ homes, 5.0★. Just confirm those are current and good to publish.
 
+**New, and the one that really needs your eyes:**
+
+5. I built a condo-building directory: the main Emeryville condo stock, one page per building, with HOA, amenities, and price ranges. It's a buyers' tool and it doubles as seller exposure (when an owner googles their building, your page comes up). I pulled the facts from public records, so a few will be off or blank and you know these buildings cold. There's a short check-sheet, `BUILDING_VERIFICATION.md`, where you just skim each building and flag anything wrong. HOA dues are the main blanks. Even rough current ranges help. No rush, but this is the piece where your knowledge is the whole edge.
+
 The video is the main thing I'm after first. Everything else we can fill in as you send it. Let me know and I'll keep building 👍

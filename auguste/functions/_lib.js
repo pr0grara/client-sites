@@ -39,17 +39,24 @@ ${realEstateSchema(brand)}
 }
 
 // ---- top navigation ----
+// Humble + simple: the name and phone lead; the page links sit slim and light to
+// their right ("in case you want more"). Secondary pages stay real <a href> in the
+// markup (and are mirrored in the footer) so nothing is lost for SEO when the
+// links collapse into the mobile menu. brand.navStock is an optional subtle callout.
 export function nav(brand) {
   const links = brand.nav.map((n) => `<a href="${n.href}">${escapeHtml(n.label)}</a>`).join('');
+  const stock = brand.navStock
+    ? `<a class="nav-stock" href="${brand.navStock.href}">${escapeHtml(brand.navStock.label)}</a>`
+    : '';
   return `<header class="nav"><div class="wrap">
   <a class="brand" href="/">${brand.brandHtml}</a>
-  <nav class="nav-links" id="navlinks">${links}</nav>
-  <div class="nav-cta">
+  <div class="nav-right">
     <a class="nav-phone" href="tel:${brand.phoneHref}">${escapeHtml(brand.phone)}</a>
-    <a class="btn gold" href="/home-value">${escapeHtml(brand.navCta)}</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+    <nav class="nav-links" id="navlinks">${links}${stock}</nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var m=document.getElementById('navlinks'),o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">&#9776;</button>
   </div>
-</div></header>`;
+</div></header>
+<script>(function(){var n=document.currentScript.previousElementSibling;function s(){n.classList.toggle('scrolled',(window.pageYOffset||0)>8)}s();addEventListener('scroll',s,{passive:true})})();</script>`;
 }
 
 // ---- footer (with required CA real-estate compliance line) ----
