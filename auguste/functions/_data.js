@@ -8,7 +8,8 @@ export const BRAND = {
   legalName: 'Auguste Vende',
   tagline: 'The Emeryville condo specialist. Over $35M sold, 7 years, 60+ homes closed — selling and buying East Bay condos, seamlessly.',
   siteUrl: 'https://www.auguste-realtor.com',
-  brandHtml: 'Auguste <b>Realtor</b>',
+  // Signature wordmark from his video title card: serif caps "Auguste" + script "Vende".
+  brandHtml: '<span class="bw">Auguste</span> <b>Vende</b>',
 
   phone: '(510) 421-6994',
   phoneHref: '+15104216994',
@@ -21,7 +22,6 @@ export const BRAND = {
     { label: 'Communities', href: '/#communities' },
     { label: 'Recently Sold', href: '/#sold' },
     { label: 'About', href: '/#about' },
-    { label: 'Sellers', href: '/home-value' },
     { label: 'Contact', href: '/#contact' }
   ],
 

@@ -24,7 +24,7 @@ function body() {
 function hero() {
   return `<section class="hero-video" id="top">
     <video class="hero-bg" autoplay muted loop playsinline preload="metadata"
-           poster="/assets/sold/pacific-park-plaza.jpg" aria-hidden="true">
+           poster="/assets/heros/hero.jpg" aria-hidden="true">
       <source src="/assets/heros/emeryville.mp4" type="video/mp4">
     </video>
     <div class="hero-scrim"></div>
