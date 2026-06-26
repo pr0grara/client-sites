@@ -25,8 +25,28 @@ arabuilds lead-gen sites.
 | `/condos/<city>` | `functions/condos/[city].js` | **Data-driven** SEO pages (emeryville, oakland, berkeley, alameda) — add to `CITIES` in `_data.js` |
 | `/home-value` | `functions/home-value.js` | Seller-valuation lead magnet |
 | `/api/lead` | `functions/api/lead.js` | POST → D1 `leads` + Resend alert |
+| `/dashboard` | `functions/dashboard.js` | **Auguste's private area** — password-gated (`DASH_PASS`). Two tabs: **Your project** (default: site status + what we need from him, content in `_project.js`) and **Leads** (`?view=leads`, reads the `leads` table) |
 
 All content/brand is in **`functions/_data.js`** — edit there.
+
+### Your project tab (`/dashboard`, default view)
+His private status board: where the build stands and the short list of deliverables we
+need from him (the video, sold photos, stat sign-off, etc.). Client-facing copy lives in
+**`functions/_project.js`** — the in-his-voice mirror of `TRACKER.md` (status = section B,
+asks = section A; update both when something changes). Each ask has a tap-to-mark-sent
+circle (per-device `localStorage`). Read-only, no backend writes; the "questions?" footer
+is the seed for turning this into a direct comms channel later.
+
+### Leads tab (`/dashboard?view=leads`)
+Where Auguste reads every lead the site captures (the Phase-3 "all leads in one place"
+promise) — on-brand, mobile-first, no login popup. Password-gated like the arabuilds plan
+page: a styled screen, a 30-day cookie, and a one-tap `/dashboard?pw=…` link he can text
+himself. Stat cards (total / this week / seller+valuation), category filter chips
+(Selling, Valuation, Buying, Rent/PM, General — derived from `intent`+`source`), search,
+CSV export, expandable rows, and a tap-to-mark-handled dot (stored per-device in
+`localStorage`). Read-only over D1 — no writes, so it can't corrupt lead data.
+Set the password: `npx wrangler pages secret put DASH_PASS` (falls back to `emeryville`
+until set — see `SECRETS.md`).
 
 ## Layout DNA (from his inspiration sites)
 - **timallenproperties.com** → serif display headlines, overlaid stat callouts

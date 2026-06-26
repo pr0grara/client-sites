@@ -4,6 +4,10 @@
 # Resend API key for lead-alert emails
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 
+# Password for Auguste's lead dashboard at /dashboard.
+# Falls back to "emeryville" if unset; set a real one in prod and rotate.
+DASH_PASS=thecondoman
+
 # --- IDX / MLS (Phase 3) ------------------------------------------------------
 # Auguste's Bridge MLS member login is NOT an API/data feed and does NOT go here.
 # IDX access comes from the chosen vendor (e.g. iHomeFinder) or a RESO Web API key

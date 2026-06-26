@@ -13,7 +13,7 @@ Source of truth for what Auguste wants. Update as he tells us more.
 - **North-star aesthetic:** make it look like **timallenproperties.com** (his stated ambition). Serif display headlines, overlaid stat callouts, fine dividers, recently-sold showcase, testimonial section.
 
 ## Decisions parked for later
-- **IDX / live listings:** **placeholder for now** (mocked search band). Default vendor if/when he switches = iHomeFinder (~$50-110/mo, his cost). Revisit only when he's ready to go live.
+- **IDX / live listings:** **placeholder for now** (mocked search band). Default vendor if/when he switches = iHomeFinder, embedded into our site (we don't need their website builder add-on). Realistic cost ~**$160/mo + ~$200 one-time setup** for the base Lead Essentials tier (1 agent, 1 MLS feed); extra MLS boards cost more. His cost, quote-only, so confirm at signup. Revisit only when he's ready to go live. _(Earlier ~$50–110/mo estimate was stale: iHomeFinder was acquired and repriced upward, verified 2026-06-25.)_
 - **Domain:** stays on WIX for now. No domain change while in dev.
 
 ## Auguste's discovery answers
@@ -32,7 +32,7 @@ Canonical source: [`arabuilds/clients/auguste/discovery-notes.md`](../../arabuil
 | **Assets** | Has it all — ~60 sold properties, reviews, bio, photos. Placeholders first, then Google Drive. |
 | **PM vs sales** | Does both; welcomes PM leads too. |
 
-**Resolved follow-ups:** IDX ballpark ~$50–110/mo (separate from MLS dues); "Recently Sold" = both his curated ~60 + IDX-pulled sold; agreed to ongoing monthly (build + monthly for SEO); keeps LSAs running.
+**Resolved follow-ups:** IDX ballpark ~$160/mo + ~$200 setup, base tier, separate from MLS dues (updated 2026-06-25, was ~$50–110/mo); "Recently Sold" = both his curated ~60 + IDX-pulled sold; agreed to ongoing monthly (build + monthly for SEO); keeps LSAs running.
 
 **New since the call (2026-06-24):** he specifically wants to keep the **Emeryville video clips** from the WIX landing — that video file is a deliverable from him.
 

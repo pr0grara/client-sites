@@ -7,8 +7,15 @@ Cloudflare (`wrangler pages secret put`) and in a local, git-ignored `.dev.vars`
 ```bash
 nvm use 22
 npx wrangler pages secret put RESEND_API_KEY   # lead-alert emails
+npx wrangler pages secret put DASH_PASS        # password for /dashboard
 ```
 Local dev reads `.dev.vars` (copy from `.dev.vars.example`, never committed).
+
+## Lead dashboard password (`DASH_PASS`)
+`/dashboard` (Auguste's private lead list) is gated by `DASH_PASS`. If the secret is
+unset it falls back to **`emeryville`** so the page works on first deploy — set a real
+password before sending Auguste the link, and rotate if it's ever shared insecurely.
+The dashboard is read-only over D1 (no writes), and pages carry `noindex,nofollow`.
 
 ## ⚠️ Auguste's Bridge MLS credentials
 Auguste shared his Bridge MLS login over chat. Treat it as sensitive:
@@ -31,5 +38,6 @@ Auguste shared his Bridge MLS login over chat. Treat it as sensitive:
 | Secret | Where | Purpose |
 |---|---|---|
 | `RESEND_API_KEY` | CF Pages secret + `.dev.vars` | Lead-alert email |
+| `DASH_PASS` | CF Pages secret + `.dev.vars` | Password for `/dashboard` (defaults to `emeryville`) |
 | Bridge MLS login | Auguste's password manager | MLS system access (his) |
 | IDX vendor / RESO key | CF Pages secret (Phase 3) | Live listing feed |
