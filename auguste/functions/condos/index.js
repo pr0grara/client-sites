@@ -135,8 +135,8 @@ function body() {
     if(!window.L||!pts.length){ if(band)band.style.display='none'; return; }
     var map=L.map('dirmap',{scrollWheelZoom:false,zoomControl:true}).setView([37.838,-122.288],14);
     window.__dirMap=map;
-    L.tileLayer('https://{s}.basemap.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-      maxZoom:19,subdomains:'abcd',
+    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png',{
+      maxZoom:19,subdomains:'abc',
       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
     var markers=[], bounds=[];
