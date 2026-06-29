@@ -302,6 +302,17 @@ footer.site .wrap{padding:clamp(40px,6vw,64px) 0 28px}
 
 .dir-note{margin-top:26px;font-size:13px;color:var(--muted);line-height:1.6;max-width:74ch}
 
+/* ---- directory map (Leaflet) ---- */
+.dir-map{height:clamp(340px,52vh,560px);border-radius:4px;border:1px solid var(--line-2);box-shadow:var(--shadow);background:#e8e8e6;z-index:0}
+.dir-map .leaflet-container{font-family:var(--sans)}
+/* brand pins via divIcon: navy by default, gold where Auguste has sold */
+.mappin{display:block;width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--navy);border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.35);cursor:pointer;transition:transform .12s}
+.mappin.sold{background:var(--gold)}
+.leaflet-marker-icon:hover .mappin,.leaflet-marker-icon:focus .mappin{transform:rotate(-45deg) scale(1.18)}
+/* flash a card when its pin is clicked */
+@keyframes bldflash{0%{box-shadow:0 0 0 0 rgba(176,141,87,0)}12%{box-shadow:0 0 0 4px rgba(176,141,87,.6)}100%{box-shadow:0 0 0 0 rgba(176,141,87,0)}}
+.bld-flash{animation:bldflash 1.5s ease-out}
+
 /* cards that have a real photo: hide the monogram fallback, let the image fill */
 .bld.has-img .ph{background:var(--navy)}
 

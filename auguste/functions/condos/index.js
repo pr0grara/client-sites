@@ -37,6 +37,15 @@ function body() {
     .concat(present.map((t) => `<button class="chip" data-filter="${t}">${escapeHtml(TYPE_LABEL[t])}</button>`))
     .join('');
 
+  // Marker data for the map — only buildings we've geocoded. Compact keys keep the
+  // inlined JSON small. `</` is escaped so a building name can never break out of the
+  // <script>. Pins link by slug to the card's id="bld-<slug>" rendered by buildingCard.
+  const mapPoints = BUILDINGS.filter((b) => b.geo).map((b) => ({
+    s: b.slug, n: b.name, h: b.neighborhood, t: b.type, sold: b.augusteSold > 0 ? 1 : 0,
+    lat: b.geo.lat, lng: b.geo.lng
+  }));
+  const mapJson = JSON.stringify(mapPoints).replace(/</g, '\\u003c');
+
   return `
   <section class="band" style="padding-bottom:0"><div class="wrap">
     <span class="label">The Condo Directory</span>
@@ -47,6 +56,18 @@ function body() {
       <div class="dstat"><div class="n">${totalUnits.toLocaleString('en-US')}</div><div class="k">Homes covered</div></div>
       <div class="dstat"><div class="n">${soldIn}</div><div class="k">Where Auguste has sold</div></div>
     </div>
+  </div></section>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <section class="band" id="dirmapband" style="padding-top:clamp(28px,4vw,46px);padding-bottom:0"><div class="wrap">
+    <div class="section-head" style="margin-bottom:clamp(20px,3vw,30px)">
+      <span class="label">The map</span>
+      <h2 class="section-title">Every building, mapped.</h2>
+      <p class="lede" style="max-width:60ch">Tap any pin to jump straight to that building's details below. Gold pins mark the buildings Auguste has personally sold in.</p>
+    </div>
+    <div id="dirmap" class="dir-map" role="application" aria-label="Map of Emeryville condo buildings"></div>
   </div></section>
 
   <section class="band" style="padding-top:clamp(28px,4vw,46px)"><div class="wrap">
@@ -67,6 +88,8 @@ function body() {
     <div class="hero-cta"><a class="btn gold lg" href="/#contact">Contact Auguste</a><a class="btn ghost lg" href="tel:${BRAND.phoneHref}" style="color:#fff;border-color:rgba(255,255,255,.4)">${escapeHtml(BRAND.phone)}</a></div>
   </div></section>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
   (function(){
     var grid=document.getElementById('dirgrid'),
@@ -74,17 +97,60 @@ function body() {
         count=document.getElementById('dircount');
     if(!grid||!bar)return;
     var cards=[].slice.call(grid.querySelectorAll('.bld'));
-    bar.addEventListener('click',function(e){
-      var btn=e.target.closest('.chip'); if(!btn)return;
-      var f=btn.getAttribute('data-filter');
-      bar.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===btn)});
+    var current='all';
+
+    // Briefly highlight a card and bring it into view (the marker's click target).
+    function jumpTo(slug){
+      if(current!=='all')applyFilter('all');           // un-hide it first if filtered out
+      var el=document.getElementById('bld-'+slug);
+      if(!el)return;
+      el.scrollIntoView({behavior:'smooth',block:'center'});
+      el.classList.remove('bld-flash');
+      void el.offsetWidth;                              // restart the animation
+      el.classList.add('bld-flash');
+    }
+
+    function applyFilter(f){
+      current=f;
+      bar.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-filter')===f)});
       var shown=0;
       cards.forEach(function(c){
         var ok=(f==='all')||c.getAttribute('data-type')===f;
         c.style.display=ok?'':'none'; if(ok)shown++;
       });
       count.textContent=shown+(shown===1?' building':' buildings');
+      if(window.__dirMarkers)window.__dirMarkers.forEach(function(m){
+        var ok=(f==='all')||m.type===f;
+        if(ok)m.addTo(window.__dirMap); else m.remove();
+      });
+    }
+    bar.addEventListener('click',function(e){
+      var btn=e.target.closest('.chip'); if(!btn)return;
+      applyFilter(btn.getAttribute('data-filter'));
     });
+
+    // ---- map (Leaflet + CARTO Positron). Degrades gracefully: if the library or
+    // its tiles don't load, hide the band so there's never an empty grey box. ----
+    var pts=${mapJson}, band=document.getElementById('dirmapband');
+    if(!window.L||!pts.length){ if(band)band.style.display='none'; return; }
+    var map=L.map('dirmap',{scrollWheelZoom:false,zoomControl:true}).setView([37.838,-122.288],14);
+    window.__dirMap=map;
+    L.tileLayer('https://{s}.basemap.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      maxZoom:19,subdomains:'abcd',
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(map);
+    var markers=[], bounds=[];
+    pts.forEach(function(p){
+      var icon=L.divIcon({className:'',iconSize:[22,22],iconAnchor:[11,11],
+        html:'<span class="mappin'+(p.sold?' sold':'')+'"></span>'});
+      var m=L.marker([p.lat,p.lng],{icon:icon,title:p.n,keyboard:true});
+      m.type=p.t;
+      m.bindTooltip(p.n+(p.h?' · '+p.h:''),{direction:'top',offset:[0,-10]});
+      m.on('click',function(){jumpTo(p.s);});
+      m.addTo(map); markers.push(m); bounds.push([p.lat,p.lng]);
+    });
+    window.__dirMarkers=markers;
+    map.fitBounds(bounds,{padding:[40,40],maxZoom:15});
   })();
   </script>`;
 }

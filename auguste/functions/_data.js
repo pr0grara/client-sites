@@ -147,11 +147,15 @@ export const CITIES = [
 // true per building as he signs off. `augusteSold` = his own closings in the building
 // (from LISTINGS.md), which doubles as social proof on each page.
 //
+// `geo:{lat,lng}` pins the building on the /condos map (street-address geocoded).
+// A building without `geo` simply gets no pin — the directory still lists it.
+//
 // East Oakland is excluded by design. Berkeley/Oakland buildings get added here later
 // with the same shape — no code changes, the directory just grows.
 export const BUILDINGS = [
   {
     slug: 'watergate', name: 'Watergate', aka: ['The Watergate'], city: 'Emeryville',
+    geo: { lat: 37.83836, lng: -122.30524 },
     img: 'sold/watergate.jpg',
     neighborhood: 'Watergate Peninsula', type: 'garden',
     yearBuilt: 1972, stories: 4, units: 1249,
@@ -165,6 +169,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'pacific-park-plaza', name: 'Pacific Park Plaza', aka: ['The Towers', '6363 Christie'], city: 'Emeryville',
+    geo: { lat: 37.84204, lng: -122.29636 },
     img: 'sold/pacific-park-plaza.jpg',
     neighborhood: 'Christie / Powell District', type: 'high-rise',
     yearBuilt: 1984, stories: 30, units: 583,
@@ -178,6 +183,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'bridgewater', name: 'Bridgewater', aka: ['6400 Christie'], city: 'Emeryville',
+    geo: { lat: 37.84498, lng: -122.29542 },
     img: 'sold/6400-christie-bridgewater.jpg',
     neighborhood: 'Christie / Powell District', type: 'mid-rise',
     yearBuilt: 1989, stories: 6, units: 425,
@@ -191,6 +197,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'terraces-emerystation', name: 'The Terraces at EmeryStation', aka: ['The Terraces', '5855 Horton'], city: 'Emeryville',
+    geo: { lat: 37.83948, lng: -122.29148 },
     img: 'sold/5855-horton-terraces.webp',
     neighborhood: 'EmeryStation / Horton', type: 'mid-rise',
     yearBuilt: 2003, stories: 8, units: 101,
@@ -204,6 +211,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'emeryville-warehouse-lofts', name: 'Emeryville Warehouse Lofts', aka: ['1500 Park Avenue Lofts'], city: 'Emeryville',
+    geo: { lat: 37.83120, lng: -122.28971 },
     img: 'sold/1500-park.jpg',
     neighborhood: 'Park Avenue District', type: 'loft',
     yearBuilt: 1925, stories: 5, units: 141,
@@ -217,6 +225,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'glashaus', name: 'Glashaus', aka: ['Glashaus Lofts'], city: 'Emeryville',
+    geo: { lat: 37.84693, lng: -122.29039 },
     img: 'buildings/glashaus.jpg', // CC0 photo, Mike Linksvayer — see assets/buildings/README.md
     neighborhood: 'Hollis / Park Avenue District', type: 'loft',
     yearBuilt: 2008, stories: 4, units: 145,
@@ -230,6 +239,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'andante', name: 'Andante', aka: ['1121 40th Street'], city: 'Emeryville',
+    geo: { lat: 37.83118, lng: -122.27900 },
     neighborhood: '40th & San Pablo', type: 'mid-rise',
     yearBuilt: 2005, stories: 5, units: 125,
     hoa: null, hoaIncludes: ['Water', 'Trash', 'Grounds', 'Management'],
@@ -242,6 +252,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'vue-46', name: 'Vue 46', aka: ['Vue46', '1001 46th Street'], city: 'Emeryville',
+    geo: { lat: 37.83560, lng: -122.27607 },
     neighborhood: 'Central Emeryville', type: 'mid-rise',
     yearBuilt: 2008, stories: 3, units: 79,
     hoa: null, hoaIncludes: ['Water', 'Sewer', 'Gas', 'Trash', 'Grounds', 'Insurance', 'Management'],
@@ -254,6 +265,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'bay-street-one', name: 'Bay Street One', aka: ['Homes above the shops'], city: 'Emeryville',
+    geo: { lat: 37.83352, lng: -122.29185 },
     neighborhood: 'Bay Street', type: 'townhome',
     yearBuilt: 2006, stories: 3, units: 95,
     hoa: { min: 391, max: 550 }, hoaIncludes: ['Water', 'Sewer', 'Trash', 'Grounds', 'Management', 'Security'],
@@ -266,6 +278,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'oliver-lofts', name: 'Oliver Lofts', aka: ['1200 65th Street', 'Oliver Rubber Lofts'], city: 'Emeryville',
+    geo: { lat: 37.84785, lng: -122.28884 },
     neighborhood: 'Park Avenue District', type: 'loft',
     yearBuilt: 2002, stories: 2, units: 50,
     hoa: { min: 771, max: 1000 }, hoaIncludes: ['Water', 'Sewer', 'Trash', 'Grounds', 'Insurance', 'Security'],
@@ -278,6 +291,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'besler-building-lofts', name: 'Besler Building Lofts', aka: ['The Besler Building', '4053 Harlan'], city: 'Emeryville',
+    geo: { lat: 37.83050, lng: -122.28391 },
     neighborhood: 'Park Avenue District', type: 'loft',
     yearBuilt: 1917, stories: 3, units: 51,
     hoa: { min: 269, max: 715 }, hoaIncludes: ['Water', 'Sewer', 'Trash', 'Insurance', 'Grounds', 'Management', 'Parking'],
@@ -290,6 +304,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'liquid-sugar-lofts', name: 'Liquid Sugar Lofts', aka: ['Liquid Sugar'], city: 'Emeryville',
+    geo: { lat: 37.84267, lng: -122.28835 },
     neighborhood: 'Doyle / Greenway', type: 'loft',
     yearBuilt: 2003, stories: null, units: 55,
     hoa: { min: 360, max: null }, hoaIncludes: ['Trash', 'Grounds', 'Management', 'Reserves'],
@@ -302,6 +317,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'greencity-lofts', name: 'GreenCity Lofts', aka: ['1007 41st Street'], city: 'Emeryville',
+    geo: { lat: 37.83204, lng: -122.27770 },
     neighborhood: 'Longfellow edge', type: 'loft',
     yearBuilt: 2005, stories: 5, units: 62,
     hoa: { min: 941, max: null }, hoaIncludes: ['Water', 'Sewer', 'Trash', 'Hot water', 'Grounds', 'Insurance', 'Management', 'Security'],
@@ -314,6 +330,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'adeline-place', name: 'Adeline Place', aka: ['3801 San Pablo'], city: 'Emeryville',
+    geo: { lat: 37.82878, lng: -122.27962 },
     neighborhood: 'San Pablo corridor', type: 'mid-rise',
     yearBuilt: 2009, stories: 4, units: 36,
     hoa: { min: 406, max: 406 }, hoaIncludes: ['Water', 'Trash', 'Grounds'],
@@ -326,6 +343,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'key-route-lofts', name: 'Key Route Lofts', aka: ['3960 Adeline Street'], city: 'Emeryville',
+    geo: { lat: 37.83057, lng: -122.27815 },
     neighborhood: 'Triangle / Adeline', type: 'loft',
     yearBuilt: 2003, stories: 3, units: 22,
     hoa: null, hoaIncludes: ['Grounds', 'Management'],
@@ -338,6 +356,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'horton-street-lofts', name: 'Horton Street Lofts', aka: ['4300 Horton Street'], city: 'Emeryville',
+    geo: { lat: 37.83225, lng: -122.28846 },
     neighborhood: 'Horton / Doyle', type: 'loft',
     yearBuilt: 1917, stories: null, units: 15,
     hoa: { min: 500, max: null }, hoaIncludes: ['Water', 'Trash'],
@@ -350,6 +369,7 @@ export const BUILDINGS = [
   },
   {
     slug: 'elevation-22', name: 'Elevation 22', aka: ['1300 Powell Street'], city: 'Emeryville',
+    geo: { lat: 37.83966, lng: -122.28785 },
     neighborhood: 'Powell District', type: 'townhome',
     yearBuilt: 2004, stories: null, units: 71,
     hoa: null, hoaIncludes: ['Grounds', 'Management'],

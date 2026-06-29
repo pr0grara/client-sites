@@ -48,7 +48,7 @@ export function buildingCard(b) {
   const fill = b.img
     ? `<img src="/assets/${escapeHtml(b.img)}" alt="${escapeHtml(b.name)}, ${escapeHtml(b.city)}" loading="lazy">`
     : `<span class="bld-mono" aria-hidden="true">${escapeHtml(b.name.replace(/^The\s+/i, '').charAt(0))}</span>`;
-  return `<a class="card bld${b.img ? ' has-img' : ''}" href="/building/${b.slug}" data-type="${b.type}" data-sold="${b.augusteSold > 0 ? 1 : 0}">
+  return `<a class="card bld${b.img ? ' has-img' : ''}" id="bld-${b.slug}" href="/building/${b.slug}" data-type="${b.type}" data-sold="${b.augusteSold > 0 ? 1 : 0}">
     <div class="ph">
       <span class="bld-type">${escapeHtml(TYPE_LABEL[b.type] || b.type)}</span>
       ${sold}
