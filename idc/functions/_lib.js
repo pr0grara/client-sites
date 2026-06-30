@@ -37,9 +37,9 @@ export function head(brand, { title, description, path = '/', bodyClass = '' } =
 <meta property="og:description" content="${escapeHtml(desc)}">
 <meta property="og:url" content="${escapeHtml(url)}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='14' fill='%230a1320'/><text x='50' y='70' font-size='46' font-weight='800' text-anchor='middle' fill='%233f8efc' font-family='Archivo,Arial,sans-serif' letter-spacing='1'>IDC</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='14' fill='%230a1320'/><circle cx='27' cy='34' r='9' fill='%23ed1c24'/><text x='50' y='74' font-size='46' font-weight='800' text-anchor='middle' fill='%23ffffff' font-family='Helvetica Neue,Arial,sans-serif' letter-spacing='1'>IDC</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 ${orgSchema(brand)}
 </head><body class="${escapeHtml(bodyClass)}">`;
@@ -49,12 +49,18 @@ ${orgSchema(brand)}
 // Wordmark + phone lead; slim page links to the right; navStock is the
 // highlighted "Open roles" CTA. Fixed, transparent over a hero at the very top,
 // opaque once scrolled, slides off on scroll-down / back on scroll-up.
-export function nav(brand) {
-  const links = brand.nav
+export function nav(brand, meta = {}) {
+  // Basic pages use brand.navHome (mirrors idcengineers.com's sections); the bold
+  // variant keeps brand.nav (the careers funnel). Falls back to brand.nav.
+  const isBold = /\bv-bold\b/.test(meta.bodyClass || '');
+  const items = (!isBold && brand.navHome) ? brand.navHome : brand.nav;
+  const here = meta.path || '/';
+  const isActive = (href) => href === here || (href !== '/' && here.startsWith(href));
+  const links = items
     .filter((n) => n.href !== brand.navStock?.href) // navStock is rendered once, highlighted
-    .map((n) => `<a href="${n.href}">${escapeHtml(n.label)}</a>`).join('');
+    .map((n) => `<a href="${n.href}"${isActive(n.href) ? ' class="active"' : ''}>${escapeHtml(n.label)}</a>`).join('');
   const stock = brand.navStock
-    ? `<a class="nav-stock" href="${brand.navStock.href}">${escapeHtml(brand.navStock.label)}</a>`
+    ? `<a class="nav-stock${isActive(brand.navStock.href) ? ' active' : ''}" href="${brand.navStock.href}">${escapeHtml(brand.navStock.label)}</a>`
     : '';
   return `<header class="nav"><div class="wrap">
   <a class="brand" href="/">${brand.brandHtml}</a>
@@ -106,7 +112,7 @@ export function footer(brand) {
 
 // Full-page shell: head + nav + body + footer.
 export function page(brand, meta, bodyHtml) {
-  return head(brand, meta) + nav(brand) + bodyHtml + footer(brand);
+  return head(brand, meta) + nav(brand, meta) + bodyHtml + footer(brand);
 }
 
 // ---- Organization JSON-LD (every page) ----

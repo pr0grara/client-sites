@@ -1,6 +1,6 @@
 // Local preview server for the IDC careers spec — no wrangler/workerd needed.
 // The page handlers are pure (context) → Response, so a plain Node http server
-// can render them. Lets you SEE both hero variants + role pages before deploying.
+// can render them. Lets you SEE the multi-page clone + role pages before deploying.
 //
 //   nvm use 22 && node preview.mjs   →  http://localhost:8788
 //
@@ -8,15 +8,31 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { onRequestGet as landing } from './functions/index.js';
+import { onRequestGet as services } from './functions/our-services.js';
+import { onRequestGet as projects } from './functions/our-projects/index.js';
+import { onRequestGet as projectPage } from './functions/our-projects/[project].js';
+import { onRequestGet as about } from './functions/about.js';
+import { onRequestGet as contact } from './functions/contact.js';
+import { onRequestGet as careers } from './functions/careers/index.js';
 import { onRequestGet as rolePage } from './functions/careers/[role].js';
 import { onRequestPost as apply } from './functions/api/apply.js';
 
 const PORT = 8788;
 const TYPES = { css: 'text/css', js: 'text/javascript', svg: 'image/svg+xml', jpg: 'image/jpeg', png: 'image/png', mp4: 'video/mp4', webp: 'image/webp' };
 
+// Static GET pages (file-routed on Cloudflare Pages). `landing` reads ?v=bold itself.
+const PAGES = {
+  '/': landing,
+  '/our-services': services,
+  '/our-projects': projects,
+  '/about': about,
+  '/contact': contact,
+  '/careers': careers
+};
+
 const server = createServer(async (rq, rs) => {
   const url = new URL(rq.url, `http://localhost:${PORT}`);
-  const path = url.pathname;
+  const path = url.pathname.replace(/\/$/, '') || '/';
   try {
     // static assets
     if (path.startsWith('/assets/')) {
@@ -33,11 +49,13 @@ const server = createServer(async (rq, rs) => {
       rs.writeHead(out.status, { 'Content-Type': 'application/json' });
       return rs.end(await out.text());
     }
-    // role pages
-    const m = path.match(/^\/careers\/([^/]+)\/?$/);
+    // role + project detail pages
+    const m = path.match(/^\/careers\/([^/]+)$/);
+    const mp = path.match(/^\/our-projects\/([^/]+)$/);
     let out;
     if (m) out = await rolePage({ params: { role: decodeURIComponent(m[1]) } });
-    else if (path === '/' || path === '') out = await landing({ request: { url: url.href } });
+    else if (mp) out = await projectPage({ params: { project: decodeURIComponent(mp[1]) } });
+    else if (PAGES[path]) out = await PAGES[path]({ request: { url: url.href } });
     else { rs.writeHead(404); return rs.end('Not found'); }
     rs.writeHead(out.status, { 'Content-Type': 'text/html; charset=utf-8' });
     rs.end(await out.text());
@@ -48,8 +66,8 @@ const server = createServer(async (rq, rs) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`\n  IDC careers preview → http://localhost:${PORT}`);
-  console.log(`  variant A (match+elevate): http://localhost:${PORT}/`);
-  console.log(`  variant B (bold):          http://localhost:${PORT}/?v=bold`);
-  console.log(`  a role page:               http://localhost:${PORT}/careers/bridge-structural-engineer-pe\n`);
+  console.log(`\n  IDC preview → http://localhost:${PORT}`);
+  console.log('  Pages: /  /our-services  /our-projects  /about  /contact  /careers');
+  console.log(`  Bold one-pager: http://localhost:${PORT}/?v=bold`);
+  console.log(`  A role page:    http://localhost:${PORT}/careers/bridge-structural-engineer-pe\n`);
 });
