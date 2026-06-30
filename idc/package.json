@@ -1,0 +1,17 @@
+{
+  "name": "idc-careers",
+  "version": "0.1.0",
+  "private": true,
+  "description": "careers.idcengineers.com — recruiting-site spec for IDC Consulting Engineers (client-sites monorepo)",
+  "scripts": {
+    "dev": "wrangler pages dev",
+    "preview": "node preview.mjs",
+    "deploy": "wrangler pages deploy",
+    "db:create": "wrangler d1 create idc-applications",
+    "db:init": "wrangler d1 execute idc-applications --file=./schema.sql --remote",
+    "db:init:local": "wrangler d1 execute idc-applications --file=./schema.sql --local"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

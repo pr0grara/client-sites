@@ -1,0 +1,5 @@
+# Copy to .dev.vars (gitignored) for local/preview secret config.
+# Production secrets go in via:  npx wrangler pages secret put RESEND_API_KEY
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+ALERT_TO=azbaghda@gmail.com
+ALERT_FROM=IDC Careers <onboarding@resend.dev>

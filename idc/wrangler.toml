@@ -1,0 +1,18 @@
+# Cloudflare Pages project for the IDC careers spec (careers.idcengineers.com).
+# Deploy:  nvm use 22 && npm run deploy   (uploads this dir straight to prod)
+name = "idc-careers"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+# Applications database (separate per client). Create once, paste the printed id:
+#   npx wrangler d1 create idc-applications
+[[d1_databases]]
+binding = "DB"
+database_name = "idc-applications"
+database_id = "72c0098f-a132-4be9-8d57-4c9fabceb210"
+
+# Non-secret vars. Secrets (RESEND_API_KEY) go in via:
+#   npx wrangler pages secret put RESEND_API_KEY
+[vars]
+ALERT_TO = "azbaghda@gmail.com"
+ALERT_FROM = "IDC Careers <onboarding@resend.dev>"
