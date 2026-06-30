@@ -14,7 +14,7 @@ Local dev reads `.dev.vars` (copy from `.dev.vars.example`, never committed).
 ## Lead dashboard password (`DASH_PASS`)
 `/dashboard` (Auguste's private lead list) is gated by `DASH_PASS`. If the secret is
 unset it falls back to **`emeryville`** so the page works on first deploy — set a real
-password before sending Auguste the link, and rotate if it's ever shared insecurely.
+password before sending Auguste the link, and rotate if it's ever shared insecurely.     
 The dashboard is read-only over D1 (no writes), and pages carry `noindex,nofollow`.
 
 ## ⚠️ Auguste's Bridge MLS credentials

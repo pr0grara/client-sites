@@ -1,0 +1,19 @@
+# Cloudflare Pages project for Pacific West Concrete (Pili).
+# Deploy:  nvm use 22 && npm run deploy   (uploads this dir straight to prod)
+name = "pacific-west-concrete"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+# Leads database (separate from auguste/arabuilds). Create it once, then paste the printed id:
+#   npx wrangler d1 create pacific-west-concrete-leads
+[[d1_databases]]
+binding = "DB"
+database_name = "pacific-west-concrete-leads"
+database_id = "4c6d877d-3794-4f8f-9204-8be5643e2792"
+
+# Non-secret vars. Secrets go in via wrangler (see README / SECRETS):
+#   npx wrangler pages secret put RESEND_API_KEY     (lead emails)
+#   npx wrangler pages secret put DASH_PASS          (dashboard password)
+[vars]
+ALERT_TO = "azbaghda@gmail.com"
+ALERT_FROM = "Pacific West Concrete <onboarding@resend.dev>"

@@ -1,0 +1,17 @@
+{
+  "name": "pacific-west-concrete",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pacific West Concrete (Pili) — East Bay concrete contractor site (client-sites monorepo)",
+  "scripts": {
+    "sync": "cp ../_shared/_lib.js functions/_lib.js && mkdir -p functions/guide && cp ../_shared/guides/guide.js functions/guide/_guide.js && cp ../_shared/guides/law-business.data.js functions/guide/_law-business-data.js",
+    "dev": "wrangler pages dev",
+    "deploy": "wrangler pages deploy",
+    "db:create": "wrangler d1 create pacific-west-concrete-leads",
+    "db:init": "wrangler d1 execute pacific-west-concrete-leads --file=./schema.sql --remote",
+    "db:init:local": "wrangler d1 execute pacific-west-concrete-leads --file=./schema.sql --local"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

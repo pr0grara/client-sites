@@ -1,0 +1,12 @@
+node_modules
+.git
+.wrangler
+wrangler.toml
+package.json
+package-lock.json
+schema.sql
+*.md
+.dev.vars
+.dev.vars.example
+.assetsignore
+.gitignore
