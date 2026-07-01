@@ -346,7 +346,6 @@ function renderOverview(brand, guide, basePath) {
     </a>`).join('');
   const sources = (guide.sources || []).map((s) =>
     `<li><a href="${escapeHtml(s.href)}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a></li>`).join('');
-  const first = guide.sections[0];
   const inner = `
   <div class="topbar"><a class="brand" href="/">${logo(brand)}</a><a class="back" href="/dashboard?view=resources">← Back to resources</a></div>
   <span class="eyebrow">Study guide · built for you</span>
@@ -355,7 +354,6 @@ function renderOverview(brand, guide, basePath) {
   <section class="panel">
     <h2>What the exam is</h2>
     <ul class="facts">${facts}</ul>
-    <a class="cta" href="${basePath}?s=${encodeURIComponent(first.id)}">Start with ${escapeHtml(first.title)} →</a>
   </section>
   <section class="panel">
     <h2>The seven sections <span class="badge">heaviest first</span></h2>
