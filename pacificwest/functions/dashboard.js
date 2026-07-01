@@ -346,6 +346,13 @@ function renderSteps() {
   </section>`;
 }
 
+// Escape a desc, then turn inline [label](url) markdown into safe links (http/https or
+// root-relative only). Plain descs pass through untouched, so it's backward-compatible.
+function linkify(s) {
+  return escapeHtml(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, href) =>
+    /^(https?:|\/)/.test(href) ? `<a href="${href}" target="_blank" rel="noopener">${label}</a>` : m);
+}
+
 function renderResources() {
   const groupsHtml = RESOURCE_GROUPS.map((g) => `
     <section class="panel">
@@ -354,11 +361,20 @@ function renderResources() {
       <div class="rcards">
         ${g.items.map((it) => {
           const isLink = it.href && it.href !== '#';
-          const cta = isLink
-            ? `<a class="rlink" href="${escapeHtml(it.href)}" target="_blank" rel="noopener">${escapeHtml(it.cta)} ↗</a>`
-            : `<span class="rsoon">${escapeHtml(it.cta)}</span>`;
-          return `<article class="rcard">
-            <div class="rbody"><h4>${escapeHtml(it.title)}</h4><p>${escapeHtml(it.desc)}</p></div>
+          const internal = isLink && it.href.startsWith('/');
+          // Internal links (the guide he owns) get a "→" and open in place; external
+          // resources get the "↗" and a new tab. Featured items skip the extra arrow
+          // the plain rlink appends, so we don't double up.
+          let cta;
+          if (!isLink) {
+            cta = `<span class="rsoon">${escapeHtml(it.cta)}</span>`;
+          } else if (it.feature) {
+            cta = `<a class="rlink rlink-feat" href="${escapeHtml(it.href)}"${internal ? '' : ' target="_blank" rel="noopener"'}>${escapeHtml(it.cta)} →</a>`;
+          } else {
+            cta = `<a class="rlink" href="${escapeHtml(it.href)}" target="_blank" rel="noopener">${escapeHtml(it.cta)} ↗</a>`;
+          }
+          return `<article class="rcard${it.feature ? ' rcard-feat' : ''}">
+            <div class="rbody">${it.feature ? '<span class="rtag">Built for you</span>' : ''}<h4>${escapeHtml(it.title)}</h4><p>${linkify(it.desc)}</p></div>
             ${cta}
           </article>`;
         }).join('')}
@@ -471,9 +487,20 @@ function chromeHead(title) {
   .rbody{flex:1;min-width:240px}
   .rbody h4{font-size:15.5px;font-weight:800;color:var(--graphite)}
   .rbody p{color:var(--muted);font-size:13.5px;margin-top:4px;max-width:64ch}
+  .rbody p a{color:inherit;text-decoration:underline;text-underline-offset:2px;font-weight:600}
+  .rbody p a:hover{color:var(--graphite)}
+  .rcard-feat .rbody p a{color:#fff}
+  .rcard-feat .rbody p a:hover{color:#fff;opacity:.82}
   .rlink{flex:none;font-weight:700;font-size:13.5px;color:#fff;background:var(--accent);border:2px solid var(--accent);border-radius:7px;padding:9px 15px;white-space:nowrap}
   .rlink:hover{background:var(--accent-dk);border-color:var(--accent-dk);color:#fff}
   .rsoon{flex:none;font-size:12px;font-weight:600;color:var(--muted);background:var(--white);border:1px dashed var(--line-2);border-radius:7px;padding:8px 13px;white-space:nowrap}
+  /* featured resource — the guide he's building his future on; inverted so it reads as the headline */
+  .rcard-feat{background:var(--graphite);border-color:var(--graphite);box-shadow:0 12px 30px rgba(25,28,32,.18)}
+  .rcard-feat .rbody h4{color:#fff}
+  .rcard-feat .rbody p{color:#c7ccd3}
+  .rtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--graphite);background:var(--paper);border-radius:999px;padding:3px 10px;margin-bottom:9px}
+  .rlink-feat{color:var(--graphite);background:#fff;border-color:#fff}
+  .rlink-feat:hover{background:var(--paper);border-color:var(--paper);color:#000}
 
   /* why-this-license explainer */
   .why p{color:var(--ink);font-size:14px;max-width:70ch;margin-top:10px}

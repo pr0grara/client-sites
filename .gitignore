@@ -5,3 +5,7 @@ node_modules/
 *.log
 
 .claude/settings.local.json
+# pili guide dev-only render (never deploy/commit)
+pacificwest/.dev-guide/
+pacificwest/dev-render-guide.mjs
+pacificwest/.dev-render-dash.mjs

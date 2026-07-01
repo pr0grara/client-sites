@@ -115,7 +115,6 @@ export const LICENSE_RATIONALE = {
 // both exams with PSI → study → pass → bond/fee/Live Scan/workers' comp → license issues.
 export const APPLICATION_STEPS = {
   tier: 'Your license, step by step',
-  note: "Five steps, in order. The split is simple: the paperwork and the waiting we handle together, and the studying is yours alone, that's the part that actually takes work. The whole thing comes down to whether you put the hours in.",
   steps: [
     {
       title: 'Create your login and share it with me',
@@ -153,7 +152,6 @@ export const APPLICATION_STEPS = {
 export const RESOURCE_GROUPS = [
   {
     tier: 'C-8 reference',
-    note: "The official pages behind the steps above. Heads up: the two CSLB guides are outlines of what's on each exam, not the study material, and there's no sample test in them. Use them to see what to study, then dig into the free study book and practice tests in the next section.",
     items: [
       { title: 'What the C-8 license covers', desc: 'The official classification: forming, pouring and finishing concrete. This is the one we’re going for.', href: 'https://www.cslb.ca.gov/about_us/library/licensing_classifications/Licensing_Classifications_Detail.aspx?Class=C-8', cta: 'CSLB · C-8 classification' },
       { title: 'C-8 trade exam: official outline', desc: 'CSLB’s outline of the trade exam: the topics and how each is weighted. It tells you what to study, but it’s not a course and has no practice questions.', href: 'https://www.cslb.ca.gov/Resources/StudyGuides/C08StudyGuide.pdf', cta: 'CSLB · C-8 outline' },
@@ -162,9 +160,8 @@ export const RESOURCE_GROUPS = [
   },
   {
     tier: 'Exam prep & practice tests',
-    note: "Once your study guide's ready (a couple days out), that's the fastest way in. In the meantime the two free resources below are genuinely useful for drilling. Step up to a paid course only if you want it all laid out or a refund safety net if you don't pass.",
     items: [
-      { title: 'Your Law & Business study guide', desc: "Before building this, I went through every paid guide below to see if one was worth pointing you to. Here's the thing: everything the exam tests is public. The state licensing board publishes all of it in the Law & Reference Book, free. The only catch is that book is long and dense, so what the $300 to $1,000+ courses are really charging for is the work of reading through it and boiling it down to what matters. That's exactly what I'm doing for you, built around your exam. If you'd rather buy a polished course, the good ones are right below and I won't be offended. But you'd just be paying for summarizing I've already done, and yours costs you nothing.", href: '#', cta: 'Ready in a couple days' },
+      { title: 'Your Law & Business study guide', desc: "Before building this, I went through every paid guide below to see if one was worth pointing you to. Here's the thing: everything the exam tests is public. The state licensing board publishes all of it in the [Law & Reference Book](https://www.cslb.ca.gov/Resources/GuidesAndPublications/2026/2026_CSLB_Law_Book.pdf), free. That book's just long and dense, so what the $300 to $1,000+ courses really sell is the work of reading it and boiling it down to what matters. That's what this is, built around your exam. The paid courses below are good if you want a more 'official' study guide. I am obviously not in the education business but I think mine is pretty good, plus it's free 99.", href: '/guide/law-business', cta: 'Open your study guide', feature: true },
       { title: 'Law & Business study book (free, official)', desc: "The California Contractors License Law & Reference Book, the actual material the Law & Business exam is built on, free straight from the state. This is your main study text for the hard exam. It's long, so lean on the outline above to hit the heavy topics first.", href: 'https://www.cslb.ca.gov/Resources/GuidesAndPublications/2026/2026_CSLB_Law_Book.pdf', cta: 'CSLB · Law & Reference Book' },
       { title: 'Law & Business practice exam', desc: "A question bank for the hard exam: timed 30-minute rounds, answers explained after. Low cost per attempt. Drill it until you're steady around 75%.", href: 'https://contractorpracticeexam.com/california-law-and-business-free-exam/', cta: 'L&B practice' },
       { title: 'C-8 trade exam prep (Digital Constructive, ~$300–$400)', desc: "Built specifically for the concrete exam. The page itself is a free, plain-English rundown of the experience rules, the five topic areas and how they're weighted, and what the day looks like, so it's worth a read either way. The real prep, their practice tests and study guide, is a paid plan (roughly $300–$400 depending on the package). Worth it if you want C-8 practice questions, since the free banks lean toward Law & Business.", href: 'https://digitalconstructive.com/concrete-license-c8-concrete-contractors/', cta: 'Digital Constructive · C-8' },
