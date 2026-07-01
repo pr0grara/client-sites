@@ -24,10 +24,33 @@ function sectionHead({ eyebrow, title, lede }) {
 }
 
 // ── Heroes ───────────────────────────────────────────────────────────────────
+// Scroll-linked parallax for the photo layer. Only the landing + projects
+// directory heroes opt in (class `hero-parallax`); one script drives any match
+// on the page. Honors prefers-reduced-motion and skips off-screen heroes.
+export function heroParallax() {
+  return `<script>(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var els=[].slice.call(document.querySelectorAll('.hero-parallax .hero-photo'));
+  if(!els.length)return;
+  var tick=false;
+  function u(){
+    for(var i=0;i<els.length;i++){
+      var p=els[i],r=p.parentElement.getBoundingClientRect();
+      if(r.bottom<0||r.top>innerHeight)continue;
+      p.style.transform='translate3d(0,'+(-r.top*0.28).toFixed(1)+'px,0)';
+    }
+    tick=false;
+  }
+  addEventListener('scroll',function(){if(!tick){requestAnimationFrame(u);tick=true;}},{passive:true});
+  addEventListener('resize',function(){if(!tick){requestAnimationFrame(u);tick=true;}},{passive:true});
+  u();
+})();</script>`;
+}
+
 // Full photo hero (homepage): real idcengineers.com bridge behind the blueprint grid.
 export function heroHome() {
   return `
-  <section class="hero hero-photo-bg">
+  <section class="hero hero-photo-bg hero-parallax">
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -43,13 +66,15 @@ export function heroHome() {
         <span>Irvine, CA</span><i></i><span>Since 1995</span><i></i><span>DBE · WBE certified</span>
       </div>
     </div>
-  </section>`;
+  </section>${heroParallax()}`;
 }
 
-// Short subpage banner over one of the firm's photos.
-export function heroLite({ eyebrow, title, lede, img: name }) {
+// Short subpage banner over one of the firm's photos. `parallax` opts the
+// photo layer into the scroll-linked treatment (used by the projects directory).
+export function heroLite({ eyebrow, title, lede, img: name, parallax = false }) {
+  const cls = 'hero-lite hero-photo-bg' + (parallax ? ' hero-parallax' : '');
   return `
-  <section class="hero-lite hero-photo-bg">
+  <section class="${cls}">
     <div class="hero-photo" aria-hidden="true" style="background-image:url('${img(name)}')"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -58,7 +83,7 @@ export function heroLite({ eyebrow, title, lede, img: name }) {
       <h1>${escapeHtml(title)}</h1>
       ${lede ? `<p>${escapeHtml(lede)}</p>` : ''}
     </div></div>
-  </section>`;
+  </section>${parallax ? heroParallax() : ''}`;
 }
 
 // ── Markets (icon strip) ─────────────────────────────────────────────────────
@@ -178,7 +203,51 @@ function directoryScript() {
       var url=f==='all'?location.pathname:location.pathname+'?market='+f;
       history.replaceState(null,'',url);
     });});
-    apply(initial());
+    var start=initial();
+    apply(start);
+    // Arrived from a home-page "what we do" market card (deep-linked + filtered)?
+    // Softly scroll past the hero to the filtered results, clearing the fixed nav.
+    if(start!=='all'){
+      var target=document.querySelector('.proj-filter')||grid;
+      var nav=document.querySelector('.nav');
+      var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      requestAnimationFrame(function(){
+        var offset=(nav?nav.offsetHeight:0)+24;
+        var endY=target.getBoundingClientRect().top+window.pageYOffset-offset;
+        var startY=window.pageYOffset||0,dist=endY-startY;
+        // The stylesheet sets html{scroll-behavior:smooth}, which would re-animate
+        // every per-frame scrollTo and fight this loop. Drive it ourselves.
+        var root=document.documentElement,prevSB=root.style.scrollBehavior;
+        root.style.scrollBehavior='auto';
+        if(reduce||Math.abs(dist)<4){window.scrollTo(0,endY);root.style.scrollBehavior=prevSB;return;}
+        // Premium reveal: the train is already rolling at load — a lead-in gives
+        // it nonzero speed from frame one — then it builds through medium and
+        // brakes on a smooth maglev airbrake to a dead stop. Final velocity is
+        // still 0, so no jerk on arrival. 'lead' sets how much it's already
+        // moving at t=0 (0 = dead standstill, higher = more initial roll). ~0.9s.
+        var lead=0.95;
+        function ease(t){return lead*(1-(1-t)*(1-t))+(1-lead)*(t*t*t*t*(5-4*t));}
+        var dur=900,t0=performance.now(),done=false;
+        function stop(){done=true;off();}
+        function off(){
+          root.style.scrollBehavior=prevSB;
+          removeEventListener('wheel',stop);
+          removeEventListener('touchstart',stop);
+          removeEventListener('keydown',stop);
+        }
+        // Never fight the visitor: any manual scroll input cancels the animation.
+        addEventListener('wheel',stop,{passive:true});
+        addEventListener('touchstart',stop,{passive:true});
+        addEventListener('keydown',stop);
+        function step(now){
+          if(done)return;
+          var p=Math.min(1,(now-t0)/dur);
+          window.scrollTo(0,startY+dist*ease(p));
+          if(p<1)requestAnimationFrame(step);else off();
+        }
+        requestAnimationFrame(step);
+      });
+    }
   })();
   </script>`;
 }
@@ -382,7 +451,7 @@ export function applySection() {
       <div class="apply-copy">
         <span class="label accent">Apply</span>
         <h2 class="section-title">Start the conversation.</h2>
-        <p>Tell us who you are and what you’ve built. A real engineer reads every one — not a resume bot. We’ll get back to you.</p>
+        <p>Tell us who you are and what you’ve built. We’ll read it and get back to you.</p>
         <p class="apply-alt">Prefer email? <a href="mailto:${escapeHtml(BRAND.email)}">${escapeHtml(BRAND.email)}</a></p>
       </div>
       <form class="apply-form" id="applyForm" novalidate>

@@ -12,7 +12,7 @@ export function onRequestGet() {
     bodyClass: 'has-hero'
   };
   const body =
-    heroLite(p) +
+    heroLite({ ...p, parallax: true }) +
     projectsDirectory('light') +
     contactCTA();
   return new Response(page(BRAND, meta, body), {

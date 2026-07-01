@@ -78,7 +78,7 @@ function applyForm(role) {
       <div class="apply-copy">
         <span class="label accent">Apply</span>
         <h2 class="section-title">Apply: ${escapeHtml(role.title)}</h2>
-        <p>A real engineer reads every application. Tell us what you’ve built and we’ll get back to you.</p>
+        <p>Tell us what you’ve built and we’ll get back to you.</p>
         <p class="apply-alt">Prefer email? <a href="mailto:${escapeHtml(BRAND.email)}?subject=${encodeURIComponent(role.title)}">${escapeHtml(BRAND.email)}</a></p>
       </div>
       <form class="apply-form" id="applyForm" novalidate>

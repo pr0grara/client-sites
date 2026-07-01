@@ -200,7 +200,7 @@ export const PAGES = {
   contact: {
     eyebrow: 'Get in touch',
     title: "Let's work together.",
-    lede: 'Tell us about your project or your interest in joining the team. A real engineer reads every message.',
+    lede: 'Tell us about your project or your interest in joining the team.',
     img: 'sfoak-bridge'
   },
   careers: {
@@ -217,7 +217,7 @@ export const STATS = [
   { figure: '1995', label: 'Designing California structures since' },
   { figure: '100+', label: 'Bridge projects delivered' },
   { figure: '$10B+', label: 'Multimodal infrastructure built' },
-  { figure: 'DBE · WBE', label: 'Certified, woman-owned firm' }
+  { figure: 'DBE · WBE', label: 'Certified' }
 ];
 
 // The four reasons a licensed engineer chooses IDC over a giant. Each leads with
